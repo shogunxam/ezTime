@@ -37,26 +37,26 @@
 	#define	debug(args...) 		""
 	#define	debugln(args...) 	""
 #elif defined(EZTIME_MAX_DEBUGLEVEL_ERROR)
-	#define	err(args...) 		if (_debug_level >= ERROR) _debug_device->print(args)
-	#define	errln(args...) 		if (_debug_level >= ERROR) _debug_device->println(args)
+	#define	err(args...) 		if (_debug_level >= eERROR) _debug_device->print(args)
+	#define	errln(args...) 		if (_debug_level >= eERROR) _debug_device->println(args)
 	#define	info(args...) 		""
 	#define	infoln(args...) 	""
 	#define	debug(args...) 		""
 	#define	debugln(args...) 	""
 #elif defined(EZTIME_MAX_DEBUGLEVEL_INFO)
-	#define	err(args...) 		if (_debug_level >= ERROR) _debug_device->print(args)
-	#define	errln(args...) 		if (_debug_level >= ERROR) _debug_device->println(args)
-	#define	info(args...) 		if (_debug_level >= INFO) _debug_device->print(args)
-	#define	infoln(args...) 	if (_debug_level >= INFO) _debug_device->println(args)
+	#define	err(args...) 		if (_debug_level >= eERROR) _debug_device->print(args)
+	#define	errln(args...) 		if (_debug_level >= eERROR) _debug_device->println(args)
+	#define	info(args...) 		if (_debug_level >= eINFO) _debug_device->print(args)
+	#define	infoln(args...) 	if (_debug_level >= eINFO) _debug_device->println(args)
 	#define	debug(args...) 		""
 	#define	debugln(args...) 	""
 #else		// nothing specified compiles everything in.
-	#define	err(args...) 		if (_debug_level >= ERROR) _debug_device->print(args)
-	#define	errln(args...) 		if (_debug_level >= ERROR) _debug_device->println(args)
-	#define	info(args...) 		if (_debug_level >= INFO) _debug_device->print(args)
-	#define	infoln(args...) 	if (_debug_level >= INFO) _debug_device->println(args)
-	#define	debug(args...) 		if (_debug_level >= DEBUG) _debug_device->print(args)
-	#define	debugln(args...) 	if (_debug_level >= DEBUG) _debug_device->println(args)
+	#define	err(args...) 		if (_debug_level >= eERROR) _debug_device->print(args)
+	#define	errln(args...) 		if (_debug_level >= eERROR) _debug_device->println(args)
+	#define	info(args...) 		if (_debug_level >= eINFO) _debug_device->print(args)
+	#define	infoln(args...) 	if (_debug_level >= eINFO) _debug_device->println(args)
+	#define	debug(args...) 		if (_debug_level >= eDEBUG) _debug_device->print(args)
+	#define	debugln(args...) 	if (_debug_level >= eDEBUG) _debug_device->println(args)
 #endif
 
 
@@ -67,7 +67,7 @@ namespace {
 
 	ezError_t _last_error = NO_ERROR;
 	String _server_error = "";
-	ezDebugLevel_t _debug_level = NONE;
+	ezDebugLevel_t _debug_level = eNONE;
 	Print *_debug_device = (Print *)&Serial;
 	ezEvent_t _events[MAX_EVENTS];
 	time_t _last_sync_time = 0;
@@ -91,9 +91,9 @@ namespace {
 
 	String debugLevelString(const ezDebugLevel_t level) {
 		switch (level) {
-			case NONE: return 	F("NONE");
-			case ERROR: return 	F("ERROR");
-			case INFO: return 	F("INFO");
+			case eNONE: return 	F("NONE");
+			case eERROR: return 	F("ERROR");
+			case eINFO: return 	F("INFO");
 			default: return 	F("DEBUG");
 		}
 	}
