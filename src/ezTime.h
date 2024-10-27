@@ -69,10 +69,10 @@ typedef enum {
 } ezError_t;
 
 typedef enum {
-	NONE, 
-	ERROR,
-	INFO,
-	DEBUG
+	eNONE, 
+	eERROR,
+	eINFO,
+	eDEBUG
 } ezDebugLevel_t;
 
 typedef enum {
